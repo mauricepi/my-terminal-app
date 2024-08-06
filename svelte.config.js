@@ -1,18 +1,21 @@
-import { sveltekit } from '@sveltejs/kit/vite';
-import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-static';
+import preprocess from 'svelte-preprocess';
 
 const config = {
     preprocess: preprocess(),
+
     kit: {
         adapter: adapter({
             pages: 'build',
             assets: 'build',
-            fallback: null
+            fallback: 'index.html'
         }),
-        target: '#svelte',
-    },
+        paths: {
+            base: process.env.NODE_ENV === 'production' ? '/my-terminal-app' : ''
+        }
+    }
 };
 
 export default config;
+
 
